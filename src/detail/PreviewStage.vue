@@ -40,7 +40,7 @@ defineEmits<{ (e: "replay"): void }>();
     <p class="sd-stage__meta">
       <span class="sd-stage__live">● live</span>
       previewing <b>{{ referenceLabel }}</b> (reference)
-      <span v-if="fallbackNote" class="sd-stage__fallback">— {{ fallbackNote }}</span>
+      <span v-if="fallbackNote" class="sd-stage__fallback">· {{ fallbackNote }}</span>
     </p>
   </div>
 </template>

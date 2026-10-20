@@ -97,7 +97,7 @@ export function buildView(
     pref.framework === "html" || !snippet.hasStylingAxis
       ? FW_LABEL[pref.framework]
       : `${FW_LABEL[pref.framework]} + ${ST_LABEL[pref.styling]}`;
-  const fallbackNote = fellBack ? `no ${requested} variant — showing the reference` : null;
+  const fallbackNote = fellBack ? `no ${requested} variant, showing the reference` : null;
 
   const ref = snippet.variants.find((v) => v.reference) ?? snippet.variants[0];
 

@@ -1,7 +1,7 @@
 import type { CSSProperties, ReactNode } from "react";
 
 /**
- * AnimatedGradientText — text painted with an animated linear gradient.
+ * AnimatedGradientText: text painted with an animated linear gradient.
  *
  * The gradient is clipped to the glyphs (`bg-clip-text text-transparent`) and
  * its background-position is animated, so the colors appear to flow across the

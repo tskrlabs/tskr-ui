@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { AnchorHTMLAttributes, ReactNode } from "react";
 
 /**
- * LinkTag (React / Next.js) — a universal link.
+ * LinkTag (React / Next.js): a universal link.
  *
  * Renders the most appropriate element for the context:
  *  - next/link <Link> for internal navigation
@@ -16,7 +16,7 @@ interface LinkTagProps
   href?: string;
   /** Render a <div> instead of a link. */
   noLink?: boolean;
-  /** Treat href as an external URL — a plain <a>. */
+  /** Treat href as an external URL (a plain <a>). */
   external?: boolean;
   /** Open in a new tab (sets target="_blank" + safe rel). */
   newTab?: boolean;

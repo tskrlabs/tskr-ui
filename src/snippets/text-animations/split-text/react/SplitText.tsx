@@ -4,7 +4,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 // Aliased so it doesn't clash with this component's own name.
 import { SplitText as GSAPSplitText } from "gsap/SplitText";
 
-/** Any GSAP tween vars — e.g. { opacity: 0, y: "100%" }. */
+/** Any GSAP tween vars, e.g. { opacity: 0, y: "100%" }. */
 type TweenVars = Record<string, number | string>;
 
 interface SplitTextProps {
@@ -43,7 +43,7 @@ export default function SplitText({
     const el = root.current;
     if (!el) return;
 
-    // Respect reduced-motion — leave the text in place, no reveal.
+    // Respect reduced-motion: leave the text in place, no reveal.
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     gsap.registerPlugin(ScrollTrigger, GSAPSplitText);

@@ -2,7 +2,7 @@ import type { CSSProperties, ReactNode } from "react";
 import "./GradientText.css";
 
 /**
- * GradientText — text painted with a linear gradient, clipped to the glyphs.
+ * GradientText: text painted with a linear gradient, clipped to the glyphs.
  *
  * Pass any number of colors; CSS distributes the stops evenly. Copy
  * GradientText.css alongside this file and keep the import above. For a version

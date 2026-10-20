@@ -5,7 +5,7 @@ export const meta: SnippetMeta = {
   title: "Split Text",
   description:
     "A GSAP reveal that splits a heading into characters, words, or lines and " +
-    "staggers them into view as it scrolls on-screen — with optional masking " +
+    "staggers them into view as it scrolls on-screen, with optional masking " +
     "for the polished 'rise from behind a clipped edge' look. A visual effect, " +
     "so the Vue cell is the reference and the React and HTML cells are " +
     "hand-checked ports of the same GSAP logic. Needs the (now-free) GSAP " +
@@ -59,7 +59,7 @@ export const meta: SnippetMeta = {
       type: "boolean",
       default: "true",
       description:
-        "Clip each unit so the text rises from behind a hard edge — the polished reveal. Maps to GSAP's mask option.",
+        "Clip each unit so the text rises from behind a hard edge: the polished reveal. Maps to GSAP's mask option.",
     },
     {
       name: "stagger",
@@ -84,7 +84,7 @@ export const meta: SnippetMeta = {
       type: "Record<string, number | string>",
       default: '{ opacity: 0, y: "100%" }',
       description:
-        "Starting GSAP state for each unit. Any tween vars — swap in x, rotate, or scale for a different entrance.",
+        "Starting GSAP state for each unit. Any tween vars; swap in x, rotate, or scale for a different entrance.",
     },
     {
       name: "to",

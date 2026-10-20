@@ -102,7 +102,7 @@ const groups = groupedSnippets();
       const burger = app.querySelector("[data-drawer-toggle]");
       const side = document.getElementById("docs-side");
       const desktop = window.matchMedia("(min-width: 1024px)");
-      // Everything the open drawer veils — kept out of the tab order while it's up.
+      // Everything the open drawer veils, kept out of the tab order while it's up.
       const behind = app.querySelectorAll(".docs-header, .docs-main");
 
       const open = () => {

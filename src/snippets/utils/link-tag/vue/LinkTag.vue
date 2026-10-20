@@ -2,7 +2,7 @@
 import { computed, defineAsyncComponent, h } from "vue";
 
 /**
- * LinkTag — a universal link.
+ * LinkTag: a universal link.
  *
  * Renders the most appropriate element for the context:
  *  - <RouterLink> for internal navigation (falls back to a plain <a> when
@@ -16,7 +16,7 @@ interface LinkTagProps {
   href?: string;
   /** Render a <div> instead of a link. */
   noLink?: boolean;
-  /** Treat href as an external URL — always a plain <a>. */
+  /** Treat href as an external URL; always a plain <a>. */
   external?: boolean;
   /** Open in a new tab (sets target="_blank"). */
   newTab?: boolean;

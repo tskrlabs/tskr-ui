@@ -2,7 +2,7 @@
 import { computed } from "vue";
 
 /**
- * GradientText — text painted with a linear gradient, clipped to the glyphs.
+ * GradientText: text painted with a linear gradient, clipped to the glyphs.
  *
  * Pass any number of colors; CSS distributes the stops evenly. For a version
  * that flows, see the Animated Gradient Text snippet.

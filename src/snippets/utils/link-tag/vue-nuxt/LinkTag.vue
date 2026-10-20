@@ -4,7 +4,7 @@ import { computed } from "vue";
 import { NuxtLink } from "#components";
 
 /**
- * LinkTag (Nuxt) — a universal link built on <NuxtLink>.
+ * LinkTag (Nuxt): a universal link built on <NuxtLink>.
  *
  * NuxtLink already resolves internal vs external automatically, so this
  * variant leans on it for navigation and only drops to <a>/<div> for the

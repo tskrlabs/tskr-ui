@@ -4,7 +4,7 @@ export const meta: SnippetMeta = {
   name: "link-tag",
   title: "Link Tag",
   description:
-    "A universal link that renders the right element for the context — a " +
+    "A universal link that renders the right element for the context: a " +
     "router link for internal navigation, a plain <a> for external URLs, or a " +
     "<div> when you just want the content. A utility, so each framework gets " +
     "its own idiomatic implementation rather than a port of one reference.",
@@ -41,7 +41,7 @@ export const meta: SnippetMeta = {
       name: "external",
       type: "boolean",
       default: "false",
-      description: "Treat href as an external URL — always a plain <a>.",
+      description: "Treat href as an external URL; always a plain <a>.",
     },
     {
       name: "newTab",
@@ -65,7 +65,7 @@ export const meta: SnippetMeta = {
       prerequisites: [
         {
           npm: "vue-router",
-          note: "Optional — gracefully falls back to a plain <a> when vue-router isn't installed.",
+          note: "Optional: gracefully falls back to a plain <a> when vue-router isn't installed.",
         },
       ],
     },
@@ -76,7 +76,7 @@ export const meta: SnippetMeta = {
       entry: "LinkTag.vue",
       native: true,
       prerequisites: [
-        { note: "Uses Nuxt's built-in <NuxtLink> — no extra install." },
+        { note: "Uses Nuxt's built-in <NuxtLink>, no extra install." },
       ],
     },
     {
