@@ -1,0 +1,44 @@
+.btn-ripple {
+  --btn-bg: #18181b;
+  --btn-bg-hover: #27272a;
+  --btn-bg-active: #3f3f46;
+  --btn-fg: #ffffff;
+  --btn-edge: rgb(255 255 255 / 0.15);
+  --btn-ring: #a1a1aa;
+
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border: 0;
+  border-radius: 0.5rem;
+  box-shadow: inset 0 0 0 1px var(--btn-edge);
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+  cursor: pointer;
+  transition: background-color 150ms;
+}
+
+.btn-ripple:hover:enabled {
+  background: var(--btn-bg-hover);
+}
+
+.btn-ripple:active:enabled {
+  background: var(--btn-bg-active);
+}
+
+.btn-ripple:focus-visible {
+  outline: 2px solid var(--btn-ring);
+  outline-offset: 2px;
+}
+
+.btn-ripple:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}

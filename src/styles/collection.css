@@ -1,0 +1,242 @@
+/*
+ * Collection gallery (ADR-0018) — the card grid and the piece modal. Docs-only
+ * chrome on the site tokens; never copied. Reuses detail.css for the code
+ * blocks, the variant selector and the breadcrumb/title/toolbar.
+ */
+
+.cg-head .con-title {
+  margin-bottom: 0.6rem;
+}
+.cg-lede {
+  max-width: 40rem;
+  margin: 0 0 1.5rem;
+  font-size: var(--text-body);
+  line-height: 1.6;
+  color: var(--color-muted);
+}
+.cg-head .con-toolbar {
+  position: static;
+  margin-bottom: 1.5rem;
+}
+.cg-count {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  color: var(--color-dim);
+}
+
+/* ---- grid ---- */
+.cg-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.cg-card {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-width: 0;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  overflow: hidden;
+}
+
+/* The preview well: inset + dot grid, like the detail page's stage. Pieces are
+   interactive here, so the card's "open" target is the footer, not the stage. */
+.cg-stage {
+  display: grid;
+  place-items: center;
+  min-height: 9.5rem;
+  padding: 2rem 1.25rem;
+  background-color: var(--color-inset);
+  /* Dot grid from the ink token, so it flips with the theme on its own. */
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    color-mix(in srgb, var(--color-fg) 6%, transparent) 1px,
+    transparent 0
+  );
+  background-size: 18px 18px;
+}
+.cg-card .cg-stage {
+  border-bottom: 1px solid var(--color-line);
+}
+.cg-stage--lg {
+  min-height: 15rem;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+}
+.cg-markup {
+  display: contents;
+}
+
+.cg-card__foot {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0.6rem 0.5rem 0.4rem;
+}
+.cg-card__open {
+  display: grid;
+  gap: 0.15rem;
+  flex: 1;
+  min-width: 0;
+  padding: 0.4rem 0.5rem;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.cg-card__open:hover {
+  background: var(--color-surface2);
+}
+.cg-card__open:hover .cg-card__title {
+  color: var(--color-accent-text);
+}
+.cg-card__open:focus-visible {
+  outline: 2px solid var(--color-accent-text);
+  outline-offset: 1px;
+}
+.cg-card__title {
+  font-family: var(--font-mono);
+  font-size: var(--text-body);
+  font-weight: 500;
+  color: var(--color-fg);
+}
+.cg-card__desc {
+  font-size: var(--text-caption);
+  line-height: 1.45;
+  color: var(--color-dim);
+}
+
+.cg-tag {
+  flex: none;
+  padding: 0.1rem 0.4rem;
+  border: 1px solid var(--color-line2);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: var(--text-eyebrow);
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  vertical-align: middle;
+}
+
+.cg-icon-btn {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  background: none;
+  color: var(--color-muted);
+  cursor: pointer;
+}
+.cg-icon-btn:hover {
+  color: var(--color-accent-text);
+  border-color: var(--color-accent-text);
+}
+.cg-icon-btn:focus-visible {
+  outline: 2px solid var(--color-accent-text);
+  outline-offset: 2px;
+}
+
+/* ---- modal ---- */
+.cg-modal {
+  margin: auto; /* preflight zeroes the UA margin that centres a modal dialog */
+  width: min(56rem, calc(100vw - 2rem));
+  max-height: calc(100dvh - 2rem);
+  padding: 0;
+  border: 1px solid var(--color-line2);
+  border-radius: var(--radius-lg);
+  background: var(--color-canvas);
+  color: var(--color-fg);
+  overscroll-behavior: contain;
+}
+.cg-modal::backdrop {
+  background: color-mix(in srgb, var(--color-inset) 70%, transparent);
+  backdrop-filter: blur(2px);
+}
+.cg-modal__inner {
+  display: grid;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem 1.5rem;
+}
+.cg-modal__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.cg-modal__title {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0.3rem 0 0.25rem;
+  font-family: var(--font-mono);
+  font-size: 1.35rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+.cg-modal__desc {
+  margin: 0;
+  font-size: var(--text-body);
+  color: var(--color-muted);
+}
+.cg-modal__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+.cg-modal__note {
+  margin: -0.4rem 0 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  color: var(--color-dim);
+}
+.cg-modal__files {
+  display: grid;
+  gap: 0.75rem;
+}
+.cg-modal__files .sd-code {
+  margin: 0;
+}
+
+.cg-copyall {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.8rem;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  font-weight: 600;
+  cursor: pointer;
+}
+.cg-copyall:hover {
+  background: var(--color-accent2);
+}
+.cg-copyall:focus-visible {
+  outline: 2px solid var(--color-accent-text);
+  outline-offset: 2px;
+}
+
+@media (max-width: 639px) {
+  .cg-modal__inner {
+    padding: 1rem;
+  }
+}

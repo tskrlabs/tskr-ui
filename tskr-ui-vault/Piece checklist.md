@@ -23,6 +23,7 @@ clears this list before it lands. It is the price of "pick it, paste it, it work
 
 ## Variants
 - [ ] CSS piece: `tailwind` + `css` markup cells, nothing else.
+- [ ] CSS piece markup is JSX-safe apart from `class`/`for` (React visitors get it with `className`/`htmlFor` swapped in): no HTML comments, no inline `style="…"`, no unclosed void tags.
 - [ ] JS piece: `vue-tailwind` (reference) + `vue-css` + `react-tailwind` + `react-css` + `html`, all behaving the same.
 
 ## Preview

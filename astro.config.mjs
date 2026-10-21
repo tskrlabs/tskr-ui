@@ -46,7 +46,8 @@ const APP_VERSION = resolveVersion();
 //      (SnippetTabs.vue, GradientTextPlayground.vue, ApiTable.astro, …) are the
 //      LIVE docs-only components and must NOT be stubbed — hence the nested
 //      `components/<dir>/` match below, not all of `src/components`.
-//   2. Non-reference snippet variants (react-next, *-css, html, …), which ship
+//   2. Non-reference snippet and collection-piece variants (react-next, *-css,
+//      html, …), which ship
 //      as RAW TEXT for copy-paste — only the vue-tailwind reference variant is
 //      run (ADR-0004 no-drift rule).
 // Those files import packages we deliberately don't install (next/link, gsap,
@@ -59,7 +60,7 @@ const APP_VERSION = resolveVersion();
 // `src/snippets/**/vue-tailwind`.
 function ignoreUnexecutedImports() {
   const FROM_DEAD_CODE =
-    /[\\/]src[\\/]docs[\\/]|[\\/]src[\\/]components[\\/][^\\/]+[\\/]|[\\/]snippets[\\/].*[\\/](vue-css|react-tailwind|react-css|react-next|html)[\\/]/;
+    /[\\/]src[\\/]docs[\\/]|[\\/]src[\\/]components[\\/][^\\/]+[\\/]|[\\/](snippets|collections)[\\/].*[\\/](vue-css|react-tailwind|react-css|react-next|html)[\\/]/;
   const STUB_ID = "\0tskr-ignored-import";
   return {
     name: "tskr:ignore-unexecuted-imports",

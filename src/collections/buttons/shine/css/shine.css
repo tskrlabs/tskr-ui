@@ -1,0 +1,69 @@
+.btn-shine {
+  --btn-bg: #4f46e5;
+  --btn-bg-hover: #6366f1;
+  --btn-fg: #ffffff;
+  --btn-glint: rgb(255 255 255 / 0.4);
+  --btn-ring: #6366f1;
+
+  position: relative;
+  isolation: isolate; /* lets the glint sit between the background and the label */
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border: 0;
+  border-radius: 0.5rem;
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+  cursor: pointer;
+  transition: background-color 150ms;
+}
+
+/* The glint: parked off the left edge, swept to the right on hover/focus.
+   No transition on the way back, so leaving snaps it home instead of
+   sweeping in reverse. */
+.btn-shine::before {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  left: 0;
+  z-index: -1;
+  width: 50%;
+  background: linear-gradient(to right, transparent, var(--btn-glint), transparent);
+  transform: translateX(-150%) skewX(-12deg);
+}
+
+.btn-shine:hover:enabled {
+  background: var(--btn-bg-hover);
+}
+
+.btn-shine:hover::before,
+.btn-shine:focus-visible::before {
+  transform: translateX(250%) skewX(-12deg);
+  transition: transform 700ms ease-out;
+}
+
+.btn-shine:focus-visible {
+  outline: 2px solid var(--btn-ring);
+  outline-offset: 2px;
+}
+
+.btn-shine:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.btn-shine:disabled::before {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-shine::before {
+    display: none;
+  }
+}

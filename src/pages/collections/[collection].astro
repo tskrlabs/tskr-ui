@@ -1,0 +1,26 @@
+---
+/*
+ * Collection page (ADR-0018) — one gallery page per collection, generated from
+ * the registry. The page hands the collection meta + every piece's raw files to
+ * the CollectionGallery island, which renders the cards and the piece modal.
+ */
+import SnippetLayout from "../../layouts/SnippetLayout.astro";
+import CollectionGallery from "../../collection/CollectionGallery.vue";
+import { allCollections, type Collection } from "../../lib/collections";
+import "../../styles/collection.css";
+
+export function getStaticPaths() {
+  return allCollections.map((c) => ({ params: { collection: c.meta.name }, props: { c } }));
+}
+
+const { c } = Astro.props as { c: Collection };
+---
+
+<SnippetLayout
+  title={c.meta.title}
+  description={c.meta.description}
+  active=""
+  activeCollection={c.meta.name}
+>
+  <CollectionGallery collection={c.meta} pieces={c.pieces} client:load />
+</SnippetLayout>

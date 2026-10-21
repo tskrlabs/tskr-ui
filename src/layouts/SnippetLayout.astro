@@ -1,12 +1,13 @@
 ---
 /*
  * SnippetLayout — the docs shell for snippet detail pages (ADR-0008):
- * full-width header, a left sidebar listing every snippet (name only, mono),
- * and a contained main column. The page supplies the detail content + its own
+ * full-width header, a left sidebar listing every collection (ADR-0018) and
+ * every snippet (name only, mono), and a contained main column. The page supplies the detail content + its own
  * right-hand "On this page" TOC.
  */
 import Layout from "./Layout.astro";
 import { groupedSnippets, snippetHref } from "../lib/snippets";
+import { allCollections, collectionHref } from "../lib/collections";
 import VariantSelector from "../detail/VariantSelector.vue";
 import Brand from "../components/Brand.astro";
 import NavActions from "../components/NavActions.astro";
@@ -17,8 +18,10 @@ interface Props {
   description?: string;
   /** name of the active snippet, for sidebar highlighting */
   active: string;
+  /** name of the active collection, for sidebar highlighting */
+  activeCollection?: string;
 }
-const { title, description, active } = Astro.props;
+const { title, description, active, activeCollection } = Astro.props;
 const groups = groupedSnippets();
 ---
 
@@ -65,6 +68,20 @@ const groups = groupedSnippets();
     <div class="docs-body">
       <div class="docs-scrim" data-drawer-close aria-hidden="true"></div>
       <aside id="docs-side" class="docs-side" aria-label="Snippets">
+        {allCollections.length > 0 && (
+          <div class="docs-side__group">
+            <p class="docs-side__cat">collections</p>
+            {allCollections.map((c) => (
+              <a
+                class="docs-link"
+                href={collectionHref(c)}
+                aria-current={c.meta.name === activeCollection ? "true" : "false"}
+              >
+                {c.meta.name}
+              </a>
+            ))}
+          </div>
+        )}
         {
           groups.map((g) => (
             <div class="docs-side__group">

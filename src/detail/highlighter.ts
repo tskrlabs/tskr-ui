@@ -13,7 +13,7 @@ export function getHighlighter(): Promise<Highlighter> {
   if (!hp) {
     hp = createHighlighter({
       themes: ["github-dark-default", "github-light-default"],
-      langs: ["vue", "tsx", "jsx", "html", "bash", "css"],
+      langs: ["vue", "tsx", "jsx", "html", "bash", "css", "js"],
     });
   }
   return hp;

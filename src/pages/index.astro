@@ -8,6 +8,7 @@ import Layout from "../layouts/Layout.astro";
 import Brand from "../components/Brand.astro";
 import NavActions from "../components/NavActions.astro";
 import { allSnippets, groupedSnippets, snippetHref } from "../lib/snippets";
+import { allCollections, collectionHref } from "../lib/collections";
 
 const groups = groupedSnippets();
 const total = allSnippets.length;
@@ -54,6 +55,20 @@ const browseHref = allSnippets[0] ? snippetHref(allSnippets[0]) : "/";
     </header>
 
     <div class="home-index">
+      {allCollections.length > 0 && (
+        <section>
+          <p class="home-cat">collections</p>
+          {allCollections.map((c) => (
+            <a class="home-item" href={collectionHref(c)}>
+              <span class="home-item__path">
+                <em>collections/</em>
+                {c.meta.name}
+              </span>
+              <span class="home-item__kind">{c.pieces.length} pieces</span>
+            </a>
+          ))}
+        </section>
+      )}
       {
         groups.map((g) => (
           <section>
