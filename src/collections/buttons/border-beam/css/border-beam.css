@@ -1,7 +1,6 @@
-/* Three layers in one element: the button background is the resting border,
-   ::before is the spinning beam, ::after is the inner face, inset by the
-   border width. The label sits on top because both pseudo-elements are behind
-   it (z-index < 0 inside the isolated button). */
+/* The track covers the button but is masked down to just its border ring;
+   the beam (::before) travels the ring along an offset-path at a constant
+   speed, so the light moves evenly along the long and short sides alike. */
 .btn-beam {
   --btn-face: #09090b;
   --btn-edge: #3f3f46;
@@ -9,19 +8,16 @@
   --btn-beam-head: #e0f2fe;
   --btn-fg: #ffffff;
   --btn-ring: #38bdf8;
-  --btn-radius: 0.5rem;
-  --btn-border: 2px;
 
   position: relative;
-  isolation: isolate;
-  overflow: hidden;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 0.75rem 1.5rem;
   border: 0;
-  border-radius: var(--btn-radius);
-  background: var(--btn-edge);
+  border-radius: 0.5rem;
+  box-shadow: inset 0 0 0 1px var(--btn-edge);
+  background: var(--btn-face);
   color: var(--btn-fg);
   font: inherit;
   font-size: 0.875rem;
@@ -30,32 +26,26 @@
   cursor: pointer;
 }
 
-.btn-beam::before {
-  content: "";
+.btn-beam-track {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  z-index: -2;
-  width: 300%;
-  aspect-ratio: 1;
-  background: conic-gradient(
-    transparent 0deg,
-    transparent 270deg,
-    var(--btn-beam) 340deg,
-    var(--btn-beam-head) 356deg,
-    transparent 360deg
-  );
-  transform: translate(-50%, -50%);
-  animation: btn-beam-spin 3s linear infinite;
+  inset: 0;
+  border: 2px solid transparent;
+  border-radius: inherit;
+  pointer-events: none;
+  /* Keep only the border ring: the padding box, excluded from the full box. */
+  mask:
+    linear-gradient(#000 0 0) padding-box exclude,
+    linear-gradient(#000 0 0);
 }
 
-.btn-beam::after {
+.btn-beam-track::before {
   content: "";
   position: absolute;
-  inset: var(--btn-border);
-  z-index: -1;
-  border-radius: calc(var(--btn-radius) - var(--btn-border));
-  background: var(--btn-face);
+  width: 3rem;
+  aspect-ratio: 1;
+  background: linear-gradient(to left, var(--btn-beam-head), var(--btn-beam), transparent);
+  offset-path: rect(0 auto auto 0 round 0.5rem);
+  animation: btn-beam-travel 3s linear infinite;
 }
 
 .btn-beam:focus-visible {
@@ -68,19 +58,19 @@
   opacity: 0.5;
 }
 
-.btn-beam:disabled::before {
+.btn-beam:disabled .btn-beam-track {
   display: none;
 }
 
-@keyframes btn-beam-spin {
+@keyframes btn-beam-travel {
   to {
-    transform: translate(-50%, -50%) rotate(1turn);
+    offset-distance: 100%;
   }
 }
 
 /* The resting border stays; only the travelling light goes. */
 @media (prefers-reduced-motion: reduce) {
-  .btn-beam::before {
+  .btn-beam-track {
     display: none;
   }
 }

@@ -82,8 +82,12 @@ export function buildPieceView(piece: PieceEntry, pref: VariantPref): PieceView 
   return { variant, files, all: bundle(files), note };
 }
 
-/** The reference's markup: what a CSS piece's preview renders (no-drift). */
-export function referenceMarkup(piece: PieceEntry): string {
+/**
+ * What a CSS piece's preview renders (no-drift): its reference files bundled
+ * exactly as Copy all would (markup, plus any CSS such as keyframes Tailwind
+ * can't express, in a <style>).
+ */
+export function referencePreview(piece: PieceEntry): string {
   const ref = piece.meta.variants.find((v) => v.reference) ?? piece.meta.variants[0];
-  return piece.files[ref.id]?.[0]?.source ?? "";
+  return bundle(piece.files[ref.id] ?? []);
 }

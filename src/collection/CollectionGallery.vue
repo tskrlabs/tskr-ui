@@ -7,7 +7,7 @@
  * closes it. Docs-only; never copied.
  */
 import { ref, computed, nextTick, onMounted, onBeforeUnmount } from "vue";
-import { Copy, Check, X } from "lucide-vue-next";
+import { Copy, Check, X, CodeXml } from "lucide-vue-next";
 import PiecePreview from "./PiecePreview.vue";
 import CodeBlock from "../detail/CodeBlock.vue";
 import VariantSelector from "../detail/VariantSelector.vue";
@@ -108,14 +108,19 @@ onBeforeUnmount(() => {
     <ul class="cg-grid">
       <li v-for="p in pieces" :key="p.meta.name" class="cg-card">
         <div class="cg-stage">
+          <span class="cg-tag cg-stage__tag">{{ p.meta.tech }}</span>
           <PiecePreview :collection="collection.name" :piece="p" />
         </div>
         <div class="cg-card__foot">
-          <button type="button" class="cg-card__open" @click="open(p.meta.name)">
+          <button
+            type="button"
+            class="cg-card__open"
+            :aria-label="`${p.meta.title}: view code`"
+            @click="open(p.meta.name)"
+          >
             <span class="cg-card__title">{{ p.meta.title }}</span>
-            <span class="cg-card__desc">{{ p.meta.description }}</span>
+            <span class="cg-card__code" aria-hidden="true"><CodeXml :size="14" /> Code</span>
           </button>
-          <span class="cg-tag">{{ p.meta.tech }}</span>
           <button
             type="button"
             class="cg-icon-btn"

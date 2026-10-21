@@ -31,6 +31,8 @@ We decided to add a second unit beside the snippet:
   [[0006-effect-port-matrix-and-nuxt-next-exemption]]). A **CSS piece** (pure
   markup + CSS) ships two cells, `tailwind` and `css`, as plain markup: a Vue or
   React wrapper around a `<button>` would differ from the markup only in syntax.
+  A `tailwind` cell may carry one small `.css` file for what utilities can't
+  express (e.g. the `@keyframes` behind Border beam's `offset-path` travel).
   A **JS piece** (behaviour: pointer math, timers, state) ships the full five:
   `vue-tailwind` (reference), `vue-css`, `react-tailwind`, `react-css`, `html`.
 - **Zero dependencies.** A piece that needs a library (gsap, a confetti lib) is
@@ -44,14 +46,15 @@ We decided to add a second unit beside the snippet:
   [[0013-single-purpose-snippets-static-vs-animated]]).
 - **No-drift holds for previews** ([[0004-single-source-snippet-structure]],
   [[0005-two-tier-pages-preview-renders-reference]]). A CSS piece's reference is
-  its `tailwind` markup, and the gallery renders *that exact file* as HTML (the
-  same string the code view shows); Tailwind v4's source scan picks its classes
-  up. A JS piece's reference is `vue-tailwind`, mounted live. Previews follow the
+  its `tailwind` cell, and the gallery renders *those exact files* as HTML (the
+  markup plus any CSS in a `<style>`, the same bundle Copy all produces);
+  Tailwind v4's source scan picks its classes up. A JS piece's reference is `vue-tailwind`, mounted live. Previews follow the
   site theme ([[0016-os-default-light-mode-accent-safe-token-split]]), so every
   piece must read on both light and dark.
 - **Copy flow: one page picker, a modal per piece.** The page reuses the global
-  **Variant preference** (framework + styling) from the snippet pages. Clicking a
-  card opens a native `<dialog>` with a large preview, the picker, and the
+  **Variant preference** (framework + styling) from the snippet pages. A card shows
+  only the live preview, a CSS/JS tag, the title and an explicit **Code**
+  button (the description lives in the modal). Opening a piece shows a native `<dialog>` with a large preview, the picker, and the
   selected variant's files as stacked code blocks, each with its own Copy, plus
   Copy all; a corner icon on the card copies the all-in-one version (CSS in
   `<style>`, JS in `<script>`) without opening anything. Opening a piece sets

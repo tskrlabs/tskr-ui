@@ -1,0 +1,6 @@
+/* Tailwind has no keyframes for offset-distance, so this one rule comes along. */
+@keyframes btn-beam-travel {
+  to {
+    offset-distance: 100%;
+  }
+}

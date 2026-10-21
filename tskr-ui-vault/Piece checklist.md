@@ -22,7 +22,7 @@ clears this list before it lands. It is the price of "pick it, paste it, it work
 - [ ] No site tokens (`bg-canvas`, `--color-accent`…): plain Tailwind palette / plain CSS only.
 
 ## Variants
-- [ ] CSS piece: `tailwind` + `css` markup cells, nothing else.
+- [ ] CSS piece: `tailwind` + `css` markup cells, nothing else. The `tailwind` cell may add one small `.css` only for what utilities can't express (e.g. `@keyframes`).
 - [ ] CSS piece markup is JSX-safe apart from `class`/`for` (React visitors get it with `className`/`htmlFor` swapped in): no HTML comments, no inline `style="…"`, no unclosed void tags.
 - [ ] JS piece: `vue-tailwind` (reference) + `vue-css` + `react-tailwind` + `react-css` + `html`, all behaving the same.
 

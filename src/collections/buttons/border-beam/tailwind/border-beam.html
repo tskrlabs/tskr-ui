@@ -1,13 +1,14 @@
 <button
   type="button"
-  class="group relative inline-flex overflow-hidden rounded-lg bg-zinc-700 p-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400 disabled:cursor-not-allowed disabled:opacity-50"
+  class="group relative inline-flex items-center justify-center rounded-lg bg-zinc-950 px-6 py-3 text-sm font-semibold text-white ring-1 ring-zinc-700 ring-inset focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400 disabled:cursor-not-allowed disabled:opacity-50"
 >
   <span
     aria-hidden="true"
-    class="absolute top-1/2 left-1/2 aspect-square w-[300%] -translate-1/2 animate-spin bg-[conic-gradient(transparent_0deg,transparent_270deg,#38bdf8_340deg,#e0f2fe_356deg,transparent_360deg)] [animation-duration:3s] group-disabled:hidden motion-reduce:hidden"
-  ></span>
-  <span
-    class="relative inline-flex items-center justify-center rounded-md bg-zinc-950 px-6 py-3 text-sm font-semibold text-white"
-    >Border beam</span
+    class="pointer-events-none absolute inset-0 rounded-[inherit] border-2 border-transparent [mask:linear-gradient(#000_0_0)_padding-box_exclude,linear-gradient(#000_0_0)] group-disabled:hidden motion-reduce:hidden"
   >
+    <span
+      class="absolute aspect-square w-12 animate-[btn-beam-travel_3s_linear_infinite] bg-linear-to-l from-sky-100 via-sky-400 to-transparent [offset-path:rect(0_auto_auto_0_round_8px)]"
+    ></span>
+  </span>
+  Border beam
 </button>

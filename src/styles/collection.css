@@ -36,6 +36,7 @@
 }
 .cg-card {
   display: grid;
+  grid-template-columns: minmax(0, 1fr); /* don't let a long title widen the card */
   grid-template-rows: auto 1fr;
   min-width: 0;
   border: 1px solid var(--color-line);
@@ -47,6 +48,7 @@
 /* The preview well: inset + dot grid, like the detail page's stage. Pieces are
    interactive here, so the card's "open" target is the footer, not the stage. */
 .cg-stage {
+  position: relative;
   display: grid;
   place-items: center;
   min-height: 9.5rem;
@@ -63,6 +65,12 @@
 .cg-card .cg-stage {
   border-bottom: 1px solid var(--color-line);
 }
+.cg-stage__tag {
+  position: absolute;
+  top: 0.6rem;
+  left: 0.6rem;
+  background: var(--color-surface);
+}
 .cg-stage--lg {
   min-height: 15rem;
   border: 1px solid var(--color-line);
@@ -72,20 +80,23 @@
   display: contents;
 }
 
+/* Footer: one wide "open" target (title, tag, an explicit Code pill) beside
+   the quick-copy icon. The pill is what tells people the card opens. */
 .cg-card__foot {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  padding: 0.5rem 0.6rem 0.5rem 0.4rem;
+  gap: 0.5rem;
+  padding: 0.5rem;
 }
 .cg-card__open {
-  display: grid;
-  gap: 0.15rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
   flex: 1;
   min-width: 0;
-  padding: 0.4rem 0.5rem;
+  padding: 0.35rem 0.35rem 0.35rem 0.5rem;
   border: 0;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-md);
   background: none;
   color: inherit;
   font: inherit;
@@ -95,23 +106,41 @@
 .cg-card__open:hover {
   background: var(--color-surface2);
 }
-.cg-card__open:hover .cg-card__title {
-  color: var(--color-accent-text);
-}
 .cg-card__open:focus-visible {
   outline: 2px solid var(--color-accent-text);
   outline-offset: 1px;
 }
 .cg-card__title {
+  min-width: 0;
+  overflow: hidden;
   font-family: var(--font-mono);
   font-size: var(--text-body);
   font-weight: 500;
   color: var(--color-fg);
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
-.cg-card__desc {
+.cg-card__code {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-left: auto;
+  padding: 0.3rem 0.55rem;
+  border: 1px solid var(--color-line2);
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
   font-size: var(--text-caption);
-  line-height: 1.45;
-  color: var(--color-dim);
+  color: var(--color-muted);
+  transition:
+    color 120ms,
+    border-color 120ms,
+    background-color 120ms;
+}
+.cg-card__open:hover .cg-card__code,
+.cg-card__open:focus-visible .cg-card__code {
+  color: var(--color-accent-ink);
+  border-color: var(--color-accent);
+  background: var(--color-accent);
 }
 
 .cg-tag {
