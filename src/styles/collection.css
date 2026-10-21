@@ -17,17 +17,25 @@
 .cg-lede a {
   color: var(--color-accent-text);
 }
-.cg-head .con-toolbar {
-  position: static;
-  margin-bottom: 0.6rem;
-}
 .cg-filters {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 0.75rem;
   margin-bottom: 1.5rem;
-  padding: 0 0.6rem;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+/* Only where the header's picker is hidden (see detail.css, <1024px). */
+.cg-filters__variant {
+  display: none;
+}
+@media (max-width: 1023px) {
+  .cg-filters__variant {
+    display: flex;
+  }
 }
 .cg-empty {
   font-family: var(--font-mono);

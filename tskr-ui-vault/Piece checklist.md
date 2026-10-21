@@ -13,6 +13,7 @@ clears this list before it lands. It is the price of "pick it, paste it, it work
 - [ ] Keyboard parity: anything the pointer can trigger, Space/Enter can (e.g. ripple from the centre on key activation; hold-to-confirm while the key is held).
 
 ## Motion
+- [ ] Never transition `border-radius` from Tailwind's `rounded-full` (it is `calc(infinity * 1px)`, so the shape stays round until the last frame, then snaps). Use `rounded-[50%]` or a real length.
 - [ ] `@media (prefers-reduced-motion: reduce)` removes the motion; the button stays fully usable and still gives feedback (a colour change is fine).
 
 ## Copy-paste hygiene

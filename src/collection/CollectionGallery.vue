@@ -128,10 +128,8 @@ onBeforeUnmount(() => {
           Some are adapted from MIT-licensed work, see <a href="/credits">credits</a>.
         </template>
       </p>
-      <div class="con-toolbar">
-        <span class="con-toolbar__label">variant</span>
-        <VariantSelector compact />
-      </div>
+      <!-- The header's variant picker is the page's one; below 1024px it folds
+           away, so a compact copy joins the filter row there. -->
       <div class="cg-filters">
         <span class="con-toolbar__label">show</span>
         <div class="vseg" role="group" aria-label="Filter by technique">
@@ -158,6 +156,7 @@ onBeforeUnmount(() => {
             {{ c.label }}
           </button>
         </div>
+        <VariantSelector compact class="cg-filters__variant" />
         <span class="cg-count" aria-live="polite">
           {{ visible.length === pieces.length ? pieces.length : `${visible.length} of ${pieces.length}` }} pieces
         </span>
