@@ -1,0 +1,86 @@
+/* Three layers in one element: the button background is the resting border,
+   ::before is the spinning beam, ::after is the inner face, inset by the
+   border width. The label sits on top because both pseudo-elements are behind
+   it (z-index < 0 inside the isolated button). */
+.btn-beam {
+  --btn-face: #09090b;
+  --btn-edge: #3f3f46;
+  --btn-beam: #38bdf8;
+  --btn-beam-head: #e0f2fe;
+  --btn-fg: #ffffff;
+  --btn-ring: #38bdf8;
+  --btn-radius: 0.5rem;
+  --btn-border: 2px;
+
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border: 0;
+  border-radius: var(--btn-radius);
+  background: var(--btn-edge);
+  color: var(--btn-fg);
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+  cursor: pointer;
+}
+
+.btn-beam::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: -2;
+  width: 300%;
+  aspect-ratio: 1;
+  background: conic-gradient(
+    transparent 0deg,
+    transparent 270deg,
+    var(--btn-beam) 340deg,
+    var(--btn-beam-head) 356deg,
+    transparent 360deg
+  );
+  transform: translate(-50%, -50%);
+  animation: btn-beam-spin 3s linear infinite;
+}
+
+.btn-beam::after {
+  content: "";
+  position: absolute;
+  inset: var(--btn-border);
+  z-index: -1;
+  border-radius: calc(var(--btn-radius) - var(--btn-border));
+  background: var(--btn-face);
+}
+
+.btn-beam:focus-visible {
+  outline: 2px solid var(--btn-ring);
+  outline-offset: 2px;
+}
+
+.btn-beam:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.btn-beam:disabled::before {
+  display: none;
+}
+
+@keyframes btn-beam-spin {
+  to {
+    transform: translate(-50%, -50%) rotate(1turn);
+  }
+}
+
+/* The resting border stays; only the travelling light goes. */
+@media (prefers-reduced-motion: reduce) {
+  .btn-beam::before {
+    display: none;
+  }
+}

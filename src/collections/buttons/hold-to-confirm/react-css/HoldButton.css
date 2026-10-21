@@ -1,0 +1,54 @@
+.btn-hold {
+  --btn-bg: #dc2626;
+  --btn-fill: #991b1b;
+  --btn-fg: #ffffff;
+  --btn-ring: #ef4444;
+
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border: 0;
+  border-radius: 0.5rem;
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+  cursor: pointer;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* Duration is set inline from HOLD_MS while holding; 200ms is the let-go. */
+.btn-hold-fill {
+  position: absolute;
+  inset: 0;
+  background: var(--btn-fill);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 200ms linear;
+}
+
+.btn-hold-fill[data-holding] {
+  transform: scaleX(1);
+}
+
+.btn-hold-label {
+  position: relative;
+}
+
+.btn-hold:focus-visible {
+  outline: 2px solid var(--btn-ring);
+  outline-offset: 2px;
+}
+
+.btn-hold:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}

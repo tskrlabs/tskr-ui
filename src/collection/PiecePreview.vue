@@ -22,10 +22,13 @@ const component = computed(() => {
   const key = Object.keys(live).find((k) => k.startsWith(prefix));
   return key ? live[key].default : null;
 });
-const markup = computed(() => (component.value ? "" : referenceMarkup(props.piece)));
+// Only a CSS piece's reference is markup; a JS piece's file is never v-html'd.
+const markup = computed(() =>
+  props.piece.meta.tech === "css" ? referenceMarkup(props.piece) : "",
+);
 </script>
 
 <template>
   <component :is="component" v-if="component" />
-  <div v-else class="cg-markup" v-html="markup"></div>
+  <div v-else-if="markup" class="cg-markup" v-html="markup"></div>
 </template>
