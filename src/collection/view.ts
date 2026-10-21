@@ -37,14 +37,18 @@ function resolve(meta: PieceMeta, pref: VariantPref): { variant: PieceVariant; f
 }
 
 /**
- * A CSS piece's markup pasted into JSX needs `className`/`htmlFor`. Derived from
- * the one markup file rather than kept as a second copy that could drift.
+ * A CSS piece's markup pasted into JSX needs `className`/`htmlFor`, and its
+ * credit comment (ADR-0019) as a JSX comment. Derived from the one markup file
+ * rather than kept as a second copy that could drift.
  */
 function toJsx(f: PieceFile): PieceFile {
   return {
     filename: f.filename.replace(/\.html$/, ".jsx"),
     lang: "jsx",
-    source: f.source.replace(/\bclass=/g, "className=").replace(/\bfor=/g, "htmlFor="),
+    source: f.source
+      .replace(/<!--\s*([\s\S]*?)\s*-->/g, "{/* $1 */}")
+      .replace(/\bclass=/g, "className=")
+      .replace(/\bfor=/g, "htmlFor="),
   };
 }
 

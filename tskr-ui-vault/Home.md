@@ -25,6 +25,7 @@ Map-of-content for the **tskr/ui** vault — all project documentation lives her
 - [[0016-os-default-light-mode-accent-safe-token-split]]
 - [[0017-sandboxes-verify-the-ports-the-site-never-runs]]
 - [[0018-collections-copy-paste-pieces-beside-snippets]]
+- [[0019-adapted-pieces-mit-credit]]
 
 ## Tooling
 - [[Impeccable (design tooling)]] — design-detector skill + how contributors use it

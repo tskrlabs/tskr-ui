@@ -23,8 +23,14 @@ clears this list before it lands. It is the price of "pick it, paste it, it work
 
 ## Variants
 - [ ] CSS piece: `tailwind` + `css` markup cells, nothing else. The `tailwind` cell may add one small `.css` only for what utilities can't express (e.g. `@keyframes`).
-- [ ] CSS piece markup is JSX-safe apart from `class`/`for` (React visitors get it with `className`/`htmlFor` swapped in): no HTML comments, no inline `style="…"`, no unclosed void tags.
+- [ ] CSS piece markup is JSX-safe apart from `class`/`for` (React visitors get it with `className`/`htmlFor` swapped in): no inline `style="…"`, no unclosed void tags, no HTML comments except the leading credit comment.
 - [ ] JS piece: `vue-tailwind` (reference) + `vue-css` + `react-tailwind` + `react-css` + `html`, all behaving the same.
+
+## Adapted pieces ([[0019-adapted-pieces-mit-credit]])
+- [ ] Source is MIT (or equivalent) per its own LICENSE / licensing page.
+- [ ] `meta.credit` set (original title, author + URL, source URL, library).
+- [ ] Every file opens with the one-line credit comment.
+- [ ] Rebuilt to this checklist, not pasted verbatim.
 
 ## Preview
 - [ ] Reads on the light and the dark stage.

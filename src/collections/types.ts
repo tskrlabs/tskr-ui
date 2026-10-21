@@ -33,13 +33,32 @@ export interface PieceVariant {
   reference?: boolean;
 }
 
+/** Third-party libraries pieces are adapted from (ADR-0019); see `libraries.ts`. */
+export type LibraryId = "magic-ui" | "uiverse";
+
+/**
+ * Where an adapted piece came from (ADR-0019). Every file of the piece also
+ * opens with a one-line credit comment, so the notice travels with each copy.
+ */
+export interface PieceCredit {
+  /** The original's name, e.g. "Rainbow Button". */
+  title: string;
+  author: string;
+  authorUrl?: string;
+  /** Link to the original. */
+  source: string;
+  library: LibraryId;
+}
+
 /** `meta.ts` at `src/collections/<collection>/<piece>/`. */
 export interface PieceMeta {
   /** Slug; matches the piece's folder name and its `#hash` on the gallery. */
   name: string;
   title: string;
-  /** One line, shown on the card and in the modal. */
+  /** One line, shown in the modal. */
   description: string;
   tech: PieceTech;
+  /** Set for pieces adapted from someone else's MIT work; absent = original. */
+  credit?: PieceCredit;
   variants: PieceVariant[];
 }

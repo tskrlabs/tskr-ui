@@ -1,0 +1,130 @@
+---
+/*
+ * Credits (ADR-0019) — every third-party library a collection piece is adapted
+ * from, the pieces taken from it, and the library's full licence text. The
+ * one-line credit comment in each piece's files points here for the rest.
+ */
+import SnippetLayout from "../layouts/SnippetLayout.astro";
+import { allCollections, collectionHref } from "../lib/collections";
+import { libraries, MIT_NOTICE } from "../collections/libraries";
+import type { LibraryId } from "../collections/types";
+import "../styles/collection.css";
+
+const used = (Object.keys(libraries) as LibraryId[])
+  .map((id) => ({
+    id,
+    lib: libraries[id],
+    pieces: allCollections.flatMap((c) =>
+      c.pieces
+        .filter((p) => p.meta.credit?.library === id)
+        .map((p) => ({ c, p: p.meta, credit: p.meta.credit! })),
+    ),
+  }))
+  .filter((u) => u.pieces.length);
+---
+
+<SnippetLayout
+  title="Credits"
+  description="Third-party work tskr/ui adapts, and the licences it is used under."
+  active=""
+>
+  <div class="cr">
+    <p class="con-bc"><span class="s-bc__name">credits</span></p>
+    <h1 class="con-title">Credits</h1>
+    <p class="cg-lede">
+      Some collection pieces are adapted from other people's MIT-licensed work. Each adapted
+      piece's code opens with a one-line credit; the full licences are below.
+    </p>
+
+    {
+      used.map(({ id, lib, pieces }) => (
+        <section class="cr-lib" id={id}>
+          <h2 class="con-h">
+            <span class="con-h__tick" />
+            <a href={lib.url} target="_blank" rel="noopener">
+              {lib.name}
+            </a>
+          </h2>
+          <ul class="cr-list">
+            {pieces.map(({ c, p, credit }) => (
+              <li>
+                <a href={`${collectionHref(c)}#${p.name}`}>{p.title}</a>
+                <span>
+                  adapted from{" "}
+                  <a href={credit.source} target="_blank" rel="noopener">
+                    {credit.title}
+                  </a>{" "}
+                  by{" "}
+                  {credit.authorUrl ? (
+                    <a href={credit.authorUrl} target="_blank" rel="noopener">
+                      {credit.author}
+                    </a>
+                  ) : (
+                    credit.author
+                  )}
+                </span>
+              </li>
+            ))}
+          </ul>
+          <pre class="cr-license">{`${lib.license} License\n\n${lib.copyright}\n\n${MIT_NOTICE}`}</pre>
+          <p class="cr-source">
+            Source: <a href={lib.licenseUrl} target="_blank" rel="noopener">{lib.licenseUrl}</a>
+          </p>
+        </section>
+      ))
+    }
+  </div>
+</SnippetLayout>
+
+<style>
+  .cr-lib {
+    margin-bottom: 2.5rem;
+  }
+  .cr-lib h2 a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .cr-list {
+    display: grid;
+    gap: 0.45rem;
+    margin: 0 0 1rem;
+    padding: 0;
+    list-style: none;
+    font-size: var(--text-body);
+  }
+  .cr-list li {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    color: var(--color-dim);
+  }
+  .cr-list a {
+    color: var(--color-muted);
+  }
+  .cr-list > li > a {
+    font-family: var(--font-mono);
+    color: var(--color-fg);
+  }
+  .cr-license {
+    margin: 0;
+    padding: 1rem 1.25rem;
+    overflow-x: auto;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    background: var(--color-inset);
+    font-family: var(--font-mono);
+    font-size: var(--text-caption);
+    line-height: 1.6;
+    color: var(--color-muted);
+    white-space: pre-wrap;
+  }
+  .cr-source {
+    margin: 0.5rem 0 0;
+    font-size: var(--text-caption);
+    color: var(--color-dim);
+  }
+  .cr-source a {
+    color: var(--color-muted);
+    overflow-wrap: anywhere;
+  }
+</style>

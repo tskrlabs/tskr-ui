@@ -14,9 +14,25 @@
   line-height: 1.6;
   color: var(--color-muted);
 }
+.cg-lede a {
+  color: var(--color-accent-text);
+}
 .cg-head .con-toolbar {
   position: static;
+  margin-bottom: 0.6rem;
+}
+.cg-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
   margin-bottom: 1.5rem;
+  padding: 0 0.6rem;
+}
+.cg-empty {
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  color: var(--color-dim);
 }
 .cg-count {
   margin-left: auto;
@@ -217,6 +233,19 @@
   margin: 0;
   font-size: var(--text-body);
   color: var(--color-muted);
+}
+.cg-modal__credit {
+  margin: 0.35rem 0 0;
+  font-size: var(--text-caption);
+  color: var(--color-dim);
+}
+.cg-modal__credit a {
+  color: var(--color-muted);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.cg-modal__credit a:hover {
+  color: var(--color-accent-text);
 }
 .cg-modal__bar {
   display: flex;

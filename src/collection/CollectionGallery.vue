@@ -13,10 +13,35 @@ import CodeBlock from "../detail/CodeBlock.vue";
 import VariantSelector from "../detail/VariantSelector.vue";
 import { pref, setPref, initPref } from "../detail/variantPref";
 import { buildPieceView } from "./view";
+import { libraries } from "../collections/libraries";
 import type { CollectionMeta } from "../collections/types";
 import type { PieceEntry } from "../lib/collections";
 
 const props = defineProps<{ collection: CollectionMeta; pieces: PieceEntry[] }>();
+
+// Filter chips: by tech, and by origin (our own vs adapted, ADR-0019).
+type TechFilter = "all" | "css" | "js";
+type OriginFilter = "all" | "original" | "adapted";
+const tech = ref<TechFilter>("all");
+const origin = ref<OriginFilter>("all");
+const techChips: { id: TechFilter; label: string }[] = [
+  { id: "all", label: "All" },
+  { id: "css", label: "CSS" },
+  { id: "js", label: "JS" },
+];
+const originChips: { id: OriginFilter; label: string }[] = [
+  { id: "all", label: "All" },
+  { id: "original", label: "Original" },
+  { id: "adapted", label: "Adapted" },
+];
+const visible = computed(() =>
+  props.pieces.filter(
+    (p) =>
+      (tech.value === "all" || p.meta.tech === tech.value) &&
+      (origin.value === "all" || (origin.value === "adapted") === !!p.meta.credit),
+  ),
+);
+const hasAdapted = computed(() => props.pieces.some((p) => p.meta.credit));
 
 const dlg = ref<HTMLDialogElement | null>(null);
 const openName = ref<string | null>(null);
@@ -97,16 +122,51 @@ onBeforeUnmount(() => {
         <span class="s-bc__group">collections/</span><span class="s-bc__name">{{ collection.name }}</span>
       </p>
       <h1 class="con-title">{{ collection.title }}</h1>
-      <p class="cg-lede">{{ collection.description }}</p>
+      <p class="cg-lede">
+        {{ collection.description }}
+        <template v-if="hasAdapted">
+          Some are adapted from MIT-licensed work, see <a href="/credits">credits</a>.
+        </template>
+      </p>
       <div class="con-toolbar">
         <span class="con-toolbar__label">variant</span>
         <VariantSelector compact />
-        <span class="cg-count">{{ pieces.length }} pieces</span>
+      </div>
+      <div class="cg-filters">
+        <span class="con-toolbar__label">show</span>
+        <div class="vseg" role="group" aria-label="Filter by technique">
+          <button
+            v-for="c in techChips"
+            :key="c.id"
+            type="button"
+            class="vseg__btn"
+            :aria-pressed="tech === c.id"
+            @click="tech = c.id"
+          >
+            {{ c.label }}
+          </button>
+        </div>
+        <div class="vseg" role="group" aria-label="Filter by origin">
+          <button
+            v-for="c in originChips"
+            :key="c.id"
+            type="button"
+            class="vseg__btn"
+            :aria-pressed="origin === c.id"
+            @click="origin = c.id"
+          >
+            {{ c.label }}
+          </button>
+        </div>
+        <span class="cg-count" aria-live="polite">
+          {{ visible.length === pieces.length ? pieces.length : `${visible.length} of ${pieces.length}` }} pieces
+        </span>
       </div>
     </header>
 
+    <p v-if="!visible.length" class="cg-empty">No pieces match these filters.</p>
     <ul class="cg-grid">
-      <li v-for="p in pieces" :key="p.meta.name" class="cg-card">
+      <li v-for="p in visible" :key="p.meta.name" class="cg-card">
         <div class="cg-stage">
           <span class="cg-tag cg-stage__tag">{{ p.meta.tech }}</span>
           <PiecePreview :collection="collection.name" :piece="p" />
@@ -152,6 +212,22 @@ onBeforeUnmount(() => {
               {{ current.meta.title }} <span class="cg-tag">{{ current.meta.tech }}</span>
             </h2>
             <p class="cg-modal__desc">{{ current.meta.description }}</p>
+            <p v-if="current.meta.credit" class="cg-modal__credit">
+              Adapted from
+              <a :href="current.meta.credit.source" target="_blank" rel="noopener">{{
+                current.meta.credit.title
+              }}</a>
+              by
+              <a
+                v-if="current.meta.credit.authorUrl"
+                :href="current.meta.credit.authorUrl"
+                target="_blank"
+                rel="noopener"
+                >{{ current.meta.credit.author }}</a
+              ><template v-else>{{ current.meta.credit.author }}</template>
+              ({{ libraries[current.meta.credit.library].name }}) ·
+              <a href="/credits">{{ libraries[current.meta.credit.library].license }}</a>
+            </p>
           </div>
           <button type="button" class="cg-icon-btn" aria-label="Close" @click="dlg?.close()">
             <X :size="16" />

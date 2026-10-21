@@ -14,6 +14,10 @@ _Avoid_: the whole library (this word used to name all of tskr/ui; it no longer 
 The unit a user copies from a **collection**: a small, finished bit of markup (plus CSS, and JS if it has behaviour) with no props, no playground and no API table. The user restyles it in their own project. A **CSS piece** ships `tailwind` + `css` markup cells; a **JS piece** ships the full five-cell matrix with `vue-tailwind` as reference. Zero dependencies; a piece that needs a library or props is a **snippet** instead. Must clear the [[Piece checklist]].
 _Avoid_: snippet (that has a detail page), item, block
 
+**Adapted piece**:
+A **piece** rebuilt from someone else's MIT-licensed work (e.g. Magic UI, Uiverse) to our piece model, carrying a one-line credit comment in every file, a credit line in the modal, and an entry with the full licence on `/credits`. The opposite is an **original** piece. See [[0019-adapted-pieces-mit-credit]].
+_Avoid_: imported, third-party piece, vendored
+
 **Snippet**:
 The atomic unit a user copies from a detail page — one self-contained component, effect, or layout, with its own page, props, and copy artifacts. The thing a "copy" button copies.
 _Avoid_: block, component (when referring to the unit rather than a Vue/React component)
