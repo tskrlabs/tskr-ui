@@ -103,9 +103,6 @@
   text-align: left;
   cursor: pointer;
 }
-.cg-card__open:hover {
-  background: var(--color-surface2);
-}
 .cg-card__open:focus-visible {
   outline: 2px solid var(--color-accent-text);
   outline-offset: 1px;

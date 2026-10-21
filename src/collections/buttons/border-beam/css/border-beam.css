@@ -41,10 +41,13 @@
 .btn-beam-track::before {
   content: "";
   position: absolute;
-  width: 3rem;
+  width: 4rem;
   aspect-ratio: 1;
-  background: linear-gradient(to left, var(--btn-beam-head), var(--btn-beam), transparent);
+  /* A round glow with no rotation: it looks the same in every direction, so
+     the corners don't swing it around. */
+  background: radial-gradient(closest-side, var(--btn-beam-head), var(--btn-beam) 45%, transparent);
   offset-path: rect(0 auto auto 0 round 0.5rem);
+  offset-rotate: 0deg;
   animation: btn-beam-travel 3s linear infinite;
 }
 
