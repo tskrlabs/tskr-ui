@@ -4,6 +4,7 @@ Map-of-content for the **tskr/ui** vault — all project documentation lives her
 
 ## Domain
 - [[CONTEXT]] — glossary / ubiquitous language
+- [[Piece checklist]] — what every collection piece must clear
 
 ## Architecture decisions
 - [[0001-distribution-by-web-copy-paste]]
@@ -23,6 +24,7 @@ Map-of-content for the **tskr/ui** vault — all project documentation lives her
 - [[0015-api-table-depicts-defaults-render-kinds-echo-controls]]
 - [[0016-os-default-light-mode-accent-safe-token-split]]
 - [[0017-sandboxes-verify-the-ports-the-site-never-runs]]
+- [[0018-collections-copy-paste-pieces-beside-snippets]]
 
 ## Tooling
 - [[Impeccable (design tooling)]] — design-detector skill + how contributors use it

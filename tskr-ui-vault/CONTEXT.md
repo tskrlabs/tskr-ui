@@ -7,11 +7,15 @@ tskr/ui is a copy-paste collection of UI components, visual effects, and layouts
 ### Units
 
 **Collection**:
-The whole tskr/ui library — the site and its full set of snippets. The brand-level noun. (`/ui` is the umbrella for all kinds, including effects and layouts, not just UI components.)
-_Avoid_: registry, library (when referring to the atomic unit)
+A single gallery page of **pieces** of one kind (e.g. Buttons, at `/collections/buttons`): you browse it by eye, pick a piece, and copy it. Not a **category** (a category groups snippets that each have their own detail page; a collection *is* the page). Listed under its own `COLLECTIONS` group in the sidebar. See [[0018-collections-copy-paste-pieces-beside-snippets]].
+_Avoid_: the whole library (this word used to name all of tskr/ui; it no longer does, and "copy-paste collection" in the tagline is plain prose), gallery, kit
+
+**Piece**:
+The unit a user copies from a **collection**: a small, finished bit of markup (plus CSS, and JS if it has behaviour) with no props, no playground and no API table. The user restyles it in their own project. A **CSS piece** ships `tailwind` + `css` markup cells; a **JS piece** ships the full five-cell matrix with `vue-tailwind` as reference. Zero dependencies; a piece that needs a library or props is a **snippet** instead. Must clear the [[Piece checklist]].
+_Avoid_: snippet (that has a detail page), item, block
 
 **Snippet**:
-The atomic unit a user copies — one self-contained component, effect, or layout. The thing a "copy" button copies.
+The atomic unit a user copies from a detail page — one self-contained component, effect, or layout, with its own page, props, and copy artifacts. The thing a "copy" button copies.
 _Avoid_: block, component (when referring to the unit rather than a Vue/React component)
 
 **Kind**:
