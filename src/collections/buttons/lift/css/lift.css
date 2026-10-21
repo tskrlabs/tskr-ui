@@ -1,0 +1,66 @@
+/* Adapted from "stale-rattlesnake-87" by cssbuttons-io (Uiverse), https://uiverse.io/cssbuttons-io/stale-rattlesnake-87 · MIT License · Copyright (c) 2023 Uiverse.io */
+.btn-lift {
+  --btn-bg: #ffffff;
+  --btn-fg: #000000;
+  --btn-edge: rgb(0 0 0 / 0.1);
+  --btn-bg-hover: #23c483;
+  --btn-fg-hover: #ffffff;
+  --btn-glow: rgb(46 229 157 / 0.4);
+  --btn-ring: #059669;
+
+  padding: 1rem 2.25rem;
+  border: 0;
+  border-radius: 9999px;
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  /* The hairline edge keeps the white pill from melting into a light page. */
+  box-shadow:
+    0 0 0 1px var(--btn-edge),
+    0 8px 15px rgb(0 0 0 / 0.1);
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    background-color 300ms,
+    color 300ms,
+    box-shadow 300ms,
+    transform 300ms;
+}
+
+.btn-lift:hover:enabled,
+.btn-lift:focus-visible {
+  background: var(--btn-bg-hover);
+  color: var(--btn-fg-hover);
+  box-shadow:
+    0 0 0 1px transparent,
+    0 15px 20px var(--btn-glow);
+  transform: translateY(-7px);
+}
+
+/* Settles most of the way back down while pressed. */
+.btn-lift:active:enabled {
+  transform: translateY(-1px);
+}
+
+.btn-lift:focus-visible {
+  outline: 2px solid var(--btn-ring);
+  outline-offset: 2px;
+}
+
+.btn-lift:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* Keeps the colour change and glow, drops the rise. */
+@media (prefers-reduced-motion: reduce) {
+  .btn-lift:hover:enabled,
+  .btn-lift:focus-visible,
+  .btn-lift:active:enabled {
+    transform: none;
+  }
+}

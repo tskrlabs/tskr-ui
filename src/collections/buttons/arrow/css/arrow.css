@@ -1,0 +1,84 @@
+/* Adapted from "modern-sheep-10" by satyamchaudharydev (Uiverse), https://uiverse.io/satyamchaudharydev/modern-sheep-10 · MIT License · Copyright (c) 2023 Uiverse.io */
+.btn-arrow {
+  --btn-bg: #645bff;
+  --btn-bg-hover: #111111;
+  --btn-fg: #ffffff;
+  --btn-ring: #645bff;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border: 0;
+  border-radius: 20px;
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1.25rem;
+  cursor: pointer;
+  transition:
+    background-color 200ms,
+    box-shadow 200ms;
+}
+
+/* The near-black face would vanish on a dark page, so it keeps a violet edge. */
+.btn-arrow:hover:enabled,
+.btn-arrow:focus-visible {
+  background: var(--btn-bg-hover);
+  box-shadow: inset 0 0 0 2px var(--btn-bg);
+}
+
+/* The shaft: invisible at rest, so only the chevron (::before) shows. On
+   hover the shaft fills in and the chevron slides to its tip. */
+.btn-arrow-icon {
+  position: relative;
+  width: 10px;
+  height: 2px;
+  margin-top: 1px;
+  transition: background-color 200ms;
+}
+
+.btn-arrow-icon::before {
+  content: "";
+  position: absolute;
+  top: -3px;
+  right: 3px;
+  box-sizing: border-box;
+  width: 8px;
+  height: 8px;
+  border: solid var(--btn-fg);
+  border-width: 0 2px 2px 0;
+  transform: rotate(-45deg);
+  transition: right 200ms;
+}
+
+.btn-arrow:hover:enabled .btn-arrow-icon,
+.btn-arrow:focus-visible .btn-arrow-icon {
+  background: var(--btn-fg);
+}
+
+.btn-arrow:hover:enabled .btn-arrow-icon::before,
+.btn-arrow:focus-visible .btn-arrow-icon::before {
+  right: 0;
+}
+
+.btn-arrow:focus-visible {
+  outline: 2px solid var(--btn-ring);
+  outline-offset: 2px;
+}
+
+.btn-arrow:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* The arrow still forms, it just snaps into place. */
+@media (prefers-reduced-motion: reduce) {
+  .btn-arrow,
+  .btn-arrow-icon,
+  .btn-arrow-icon::before {
+    transition: none;
+  }
+}

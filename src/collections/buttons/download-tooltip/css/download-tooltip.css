@@ -1,0 +1,146 @@
+/* Adapted from "afraid-yak-30" by satyamchaudharydev (Uiverse), https://uiverse.io/satyamchaudharydev/afraid-yak-30 · MIT License · Copyright (c) 2023 Uiverse.io */
+.btn-download-tooltip {
+  --btn-bg: #1163ff;
+  --btn-bg-hover: #6c18ff;
+  --btn-fg: #ffffff;
+  --btn-tip-bg: #ffffff;
+  --btn-tip-fg: #18181b;
+  --btn-ring: #1163ff;
+
+  /* No overflow: hidden here, or the tooltip above would be cut off; only
+     the face clips its sliding text and icon. */
+  position: relative;
+  display: inline-flex;
+  padding: 0;
+  border: 0;
+  border-radius: 0.5rem;
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+  cursor: pointer;
+  transition: background-color 300ms;
+}
+
+/* The tooltip (::before) and its arrow (::after) wait 10px higher, hidden,
+   and drop into place as they fade in. */
+.btn-download-tooltip::before,
+.btn-download-tooltip::after {
+  position: absolute;
+  left: 50%;
+  pointer-events: none;
+  visibility: hidden;
+  opacity: 0;
+  transform: translate(-50%, -10px);
+  transition: all 500ms;
+}
+
+.btn-download-tooltip::before {
+  /* The `/ ""` gives the tooltip an empty alt text, so screen readers don't
+     fold it into the button's name when it appears (the first line is the
+     fallback for browsers without content alt text). */
+  content: attr(data-tooltip);
+  content: attr(data-tooltip) / "";
+  bottom: calc(100% + 1rem);
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.25rem;
+  background: var(--btn-tip-bg);
+  color: var(--btn-tip-fg);
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1rem;
+  white-space: nowrap;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.btn-download-tooltip::after {
+  content: "";
+  bottom: calc(100% - 0.25rem);
+  border: 10px solid transparent;
+  border-top-color: var(--btn-tip-bg);
+}
+
+.btn-download-tooltip-face {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: inherit;
+}
+
+.btn-download-tooltip-text {
+  display: block;
+  padding: 0.75rem 1.5rem;
+  transition: transform 500ms;
+}
+
+.btn-download-tooltip-icon {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(100%);
+  transition: transform 500ms;
+}
+
+.btn-download-tooltip-icon svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.btn-download-tooltip:hover:enabled,
+.btn-download-tooltip:focus-visible {
+  background: var(--btn-bg-hover);
+}
+
+.btn-download-tooltip:hover:enabled::before,
+.btn-download-tooltip:hover:enabled::after,
+.btn-download-tooltip:focus-visible::before,
+.btn-download-tooltip:focus-visible::after {
+  visibility: visible;
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.btn-download-tooltip:hover:enabled .btn-download-tooltip-text,
+.btn-download-tooltip:focus-visible .btn-download-tooltip-text {
+  transform: translateY(-100%);
+}
+
+.btn-download-tooltip:hover:enabled .btn-download-tooltip-icon,
+.btn-download-tooltip:focus-visible .btn-download-tooltip-icon {
+  transform: translateY(0);
+}
+
+.btn-download-tooltip:focus-visible {
+  outline: 2px solid var(--btn-ring);
+  outline-offset: 2px;
+}
+
+.btn-download-tooltip:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* The label stays and the tooltip just fades in; the colour change is the
+   rest of the feedback. */
+@media (prefers-reduced-motion: reduce) {
+  .btn-download-tooltip::before,
+  .btn-download-tooltip::after {
+    transform: translate(-50%, 0);
+  }
+
+  .btn-download-tooltip-icon {
+    display: none;
+  }
+
+  .btn-download-tooltip:hover:enabled .btn-download-tooltip-text,
+  .btn-download-tooltip:focus-visible .btn-download-tooltip-text {
+    transform: none;
+  }
+}

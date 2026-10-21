@@ -1,0 +1,153 @@
+/* Adapted from "curly-seahorse-76" by zjssun (Uiverse), https://uiverse.io/zjssun/curly-seahorse-76 · MIT License · Copyright (c) 2023 Uiverse.io */
+.btn-bubbles {
+  --btn-bg: #7d2ae8;
+  --btn-bg-hover: #9450ee;
+  --btn-fg: #ffffff;
+  --btn-bubbles-color: #7d2ae8;
+  --btn-ring: #8b5cf6;
+
+  position: relative;
+  isolation: isolate; /* keeps the bursts (z-index -1) above the page, below the label */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border: 0;
+  border-radius: 0.375rem;
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+  cursor: pointer;
+  transition:
+    background-color 200ms,
+    transform 200ms;
+}
+
+/* One burst above, one below, each wider than the button. */
+.btn-bubbles::before,
+.btn-bubbles::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  z-index: -1;
+  width: 150%;
+  height: 100%;
+  background-repeat: no-repeat;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.btn-bubbles::before {
+  top: -70%;
+}
+
+.btn-bubbles::after {
+  bottom: -70%;
+}
+
+.btn-bubbles:hover::before,
+.btn-bubbles:focus-visible::before {
+  animation: btn-bubbles-top 0.6s ease;
+}
+
+.btn-bubbles:hover::after,
+.btn-bubbles:focus-visible::after {
+  animation: btn-bubbles-bottom 0.6s ease;
+}
+
+.btn-bubbles:active:enabled {
+  transform: scale(0.96);
+}
+
+.btn-bubbles:focus-visible {
+  outline: 2px solid var(--btn-ring);
+  outline-offset: 2px;
+}
+
+.btn-bubbles:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.btn-bubbles:disabled::before,
+.btn-bubbles:disabled::after {
+  display: none;
+}
+
+/* Each burst is a stack of radial-gradient dots that drift outward and shrink
+   to nothing. The dots live only inside the animation, so nothing lingers
+   once it has played. */
+@keyframes btn-bubbles-top {
+  0%,
+  100% {
+    background-image:
+      radial-gradient(circle, var(--btn-bubbles-color) 20%, transparent 20%),
+      radial-gradient(circle, transparent 20%, var(--btn-bubbles-color) 20%, transparent 30%),
+      radial-gradient(circle, var(--btn-bubbles-color) 20%, transparent 20%),
+      radial-gradient(circle, var(--btn-bubbles-color) 20%, transparent 20%),
+      radial-gradient(circle, transparent 10%, var(--btn-bubbles-color) 15%, transparent 20%),
+      radial-gradient(circle, var(--btn-bubbles-color) 20%, transparent 20%),
+      radial-gradient(circle, var(--btn-bubbles-color) 20%, transparent 20%),
+      radial-gradient(circle, var(--btn-bubbles-color) 20%, transparent 20%),
+      radial-gradient(circle, var(--btn-bubbles-color) 20%, transparent 20%);
+  }
+  0% {
+    background-size:
+      10% 10%, 20% 20%, 15% 15%, 20% 20%, 18% 18%, 10% 10%, 15% 15%, 10% 10%, 18% 18%;
+    background-position:
+      5% 90%, 10% 90%, 10% 90%, 15% 90%, 25% 90%, 25% 90%, 40% 90%, 55% 90%, 70% 90%;
+  }
+  50% {
+    background-position:
+      0% 80%, 0% 20%, 10% 40%, 20% 0%, 30% 30%, 22% 50%, 50% 50%, 65% 20%, 90% 30%;
+  }
+  100% {
+    background-size: 0 0;
+    background-position:
+      0% 70%, 0% 10%, 10% 30%, 20% -10%, 30% 20%, 22% 40%, 50% 40%, 65% 10%, 90% 20%;
+  }
+}
+
+@keyframes btn-bubbles-bottom {
+  0%,
+  100% {
+    background-image:
+      radial-gradient(circle, var(--btn-bubbles-color) 20%, transparent 20%),
+      radial-gradient(circle, var(--btn-bubbles-color) 20%, transparent 20%),
+      radial-gradient(circle, transparent 10%, var(--btn-bubbles-color) 15%, transparent 20%),
+      radial-gradient(circle, var(--btn-bubbles-color) 20%, transparent 20%),
+      radial-gradient(circle, var(--btn-bubbles-color) 20%, transparent 20%),
+      radial-gradient(circle, var(--btn-bubbles-color) 20%, transparent 20%),
+      radial-gradient(circle, var(--btn-bubbles-color) 20%, transparent 20%);
+  }
+  0% {
+    background-size: 15% 15%, 20% 20%, 18% 18%, 20% 20%, 15% 15%, 20% 20%, 18% 18%;
+    background-position: 10% -10%, 30% 10%, 55% -10%, 70% -10%, 85% -10%, 70% -10%, 70% 0%;
+  }
+  50% {
+    background-position: 0% 80%, 20% 80%, 45% 60%, 60% 100%, 75% 70%, 95% 60%, 105% 0%;
+  }
+  100% {
+    background-size: 0 0;
+    background-position: 0% 90%, 20% 90%, 45% 70%, 60% 110%, 75% 80%, 95% 70%, 110% 10%;
+  }
+}
+
+/* No bursts and no squeeze; a lighter face on hover stands in for them. */
+@media (prefers-reduced-motion: reduce) {
+  .btn-bubbles::before,
+  .btn-bubbles::after {
+    display: none;
+  }
+
+  .btn-bubbles:hover:enabled {
+    background: var(--btn-bg-hover);
+  }
+
+  .btn-bubbles:active:enabled {
+    transform: none;
+  }
+}

@@ -1,0 +1,86 @@
+/* Adapted from "tall-termite-79" by vinodjangid07 (Uiverse), https://uiverse.io/vinodjangid07/tall-termite-79 · MIT License · Copyright (c) 2023 Uiverse.io */
+.btn-invert-sweep {
+  --btn-bg: #0a0a0a;
+  --btn-fg: #ffffff;
+  --btn-edge: rgb(255 255 255 / 0.2);
+  --btn-ring: #71717a;
+
+  position: relative;
+  isolation: isolate; /* keeps the blend inside the button, off the page behind it */
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-width: 8rem;
+  padding: 0.75rem 1.5rem;
+  border: 0;
+  border-radius: 0.5rem;
+  /* The inset edge keeps a near-black button visible on a dark page. */
+  box-shadow:
+    inset 0 0 0 1px var(--btn-edge),
+    5px 5px 10px rgb(0 0 0 / 0.1);
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+  cursor: pointer;
+  transition: transform 300ms;
+}
+
+.btn-invert-sweep-icon {
+  flex-shrink: 0;
+  width: 1rem;
+}
+
+/* A white circle parked off the left edge. On hover it slides in, rising
+   and squaring off; "difference" against white flips every colour under it,
+   label and icon included. Its side equals the button's width, so the
+   min-width keeps it tall enough to cover once lifted by half. */
+.btn-invert-sweep::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #ffffff;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  transform: translateX(-100%);
+  transition: all 300ms;
+}
+
+.btn-invert-sweep:hover:enabled::before,
+.btn-invert-sweep:focus-visible::before {
+  border-radius: 0;
+  transform: translate(0, -50%);
+}
+
+.btn-invert-sweep:active:enabled {
+  transform: translate(5px, 5px);
+}
+
+.btn-invert-sweep:focus-visible {
+  outline: 2px solid var(--btn-ring);
+  outline-offset: 2px;
+}
+
+.btn-invert-sweep:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* The inversion snaps on instead of sweeping, and the press doesn't shift. */
+@media (prefers-reduced-motion: reduce) {
+  .btn-invert-sweep::before {
+    transition: none;
+  }
+
+  .btn-invert-sweep:active:enabled {
+    transform: none;
+  }
+}

@@ -225,7 +225,10 @@ onBeforeUnmount(() => {
                 rel="noopener"
                 >{{ current.meta.credit.author }}</a
               ><template v-else>{{ current.meta.credit.author }}</template>
-              ({{ libraries[current.meta.credit.library].name }}) ·
+              <template v-if="current.meta.credit.author !== libraries[current.meta.credit.library].name">
+                ({{ libraries[current.meta.credit.library].name }})
+              </template>
+              ·
               <a href="/credits">{{ libraries[current.meta.credit.library].license }}</a>
             </p>
           </div>

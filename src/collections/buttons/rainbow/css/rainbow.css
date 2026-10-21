@@ -1,0 +1,92 @@
+/* Adapted from "Rainbow Button" by Magic UI, https://magicui.design/docs/components/rainbow-button · MIT License · Copyright (c) Magic UI */
+.btn-rainbow {
+  --btn-face: #121213;
+  --btn-fg: #ffffff;
+  --btn-ring: #8b5cf6;
+  --btn-rainbow: linear-gradient(
+    90deg,
+    oklch(66.2% 0.225 25.9),
+    oklch(90.7% 0.231 133),
+    oklch(69.6% 0.165 251),
+    oklch(80.2% 0.134 225),
+    oklch(60.4% 0.26 302)
+  );
+
+  position: relative;
+  isolation: isolate; /* keeps the glow beneath the button inside its own layer */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* The 2px border is part of the 0.75rem / 1.5rem padding. */
+  padding: calc(0.75rem - 2px) calc(1.5rem - 2px);
+  border: 2px solid transparent;
+  border-radius: 0.5rem;
+  /* Three layers: the face (padding box); a fade over the border that hides
+     the rainbow along the top and lets it through along the bottom; and the
+     rainbow itself, under both. */
+  background:
+    linear-gradient(var(--btn-face), var(--btn-face)) padding-box,
+    linear-gradient(
+        var(--btn-face) 50%,
+        color-mix(in srgb, var(--btn-face) 60%, transparent) 80%,
+        transparent
+      )
+      border-box,
+    var(--btn-rainbow) border-box;
+  background-size: 200%;
+  color: var(--btn-fg);
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+  cursor: pointer;
+  animation: btn-rainbow-shift 2s linear infinite;
+}
+
+/* The glow: a blurred strip of the same rainbow just below the bottom edge. */
+.btn-rainbow::before {
+  content: "";
+  position: absolute;
+  bottom: -20%;
+  left: 50%;
+  z-index: -1;
+  width: 60%;
+  height: 20%;
+  background: var(--btn-rainbow);
+  background-size: 200%;
+  filter: blur(0.75rem);
+  transform: translateX(-50%);
+  animation: btn-rainbow-shift 2s linear infinite;
+}
+
+.btn-rainbow:focus-visible {
+  outline: 2px solid var(--btn-ring);
+  outline-offset: 2px;
+}
+
+.btn-rainbow:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  animation: none;
+}
+
+.btn-rainbow:disabled::before {
+  display: none;
+}
+
+@keyframes btn-rainbow-shift {
+  from {
+    background-position: 0%;
+  }
+  to {
+    background-position: 200%;
+  }
+}
+
+/* The rainbow and its glow stay; they just stop running. */
+@media (prefers-reduced-motion: reduce) {
+  .btn-rainbow,
+  .btn-rainbow::before {
+    animation: none;
+  }
+}

@@ -1,0 +1,10 @@
+/* Adapted from "Rainbow Button" by Magic UI, https://magicui.design/docs/components/rainbow-button · MIT License · Copyright (c) Magic UI */
+/* Tailwind has no keyframes for background-position, so this one rule comes along. */
+@keyframes btn-rainbow-shift {
+  from {
+    background-position: 0%;
+  }
+  to {
+    background-position: 200%;
+  }
+}

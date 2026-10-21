@@ -1,0 +1,8 @@
+/* Adapted from "happy-moth-17" by doniaskima (Uiverse), https://uiverse.io/doniaskima/happy-moth-17 · MIT License · Copyright (c) 2023 Uiverse.io */
+/* The ticker's copies sit 6em apart (text-shadow), so sliding by exactly 6em
+   loops seamlessly. Tailwind has no keyframes for that, so this rule comes along. */
+@keyframes btn-marquee-scroll {
+  to {
+    transform: translateX(6em);
+  }
+}

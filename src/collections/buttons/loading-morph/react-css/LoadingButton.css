@@ -1,0 +1,123 @@
+.btn-loading {
+  --btn-bg: #4f46e5;
+  --btn-bg-hover: #6366f1;
+  --btn-success: #059669;
+  --btn-error: #dc2626;
+  --btn-fg: #ffffff;
+  --btn-ring: #6366f1;
+
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border: 0;
+  border-radius: 0.5rem;
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    width 300ms ease-in-out,
+    border-radius 300ms ease-in-out,
+    background-color 300ms;
+}
+
+.btn-loading[data-state="idle"]:hover:enabled {
+  background: var(--btn-bg-hover);
+}
+
+.btn-loading[data-state="success"] {
+  background: var(--btn-success);
+}
+
+.btn-loading[data-state="error"] {
+  background: var(--btn-error);
+}
+
+.btn-loading-label {
+  transition: opacity 150ms;
+}
+
+/* The label fades but stays in the DOM, so it keeps the button's name. */
+.btn-loading:not([data-state="idle"]) .btn-loading-label {
+  opacity: 0;
+}
+
+.btn-loading-icon,
+.btn-loading-status {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-loading-icon svg {
+  display: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.btn-loading[data-state="loading"] .btn-loading-spinner,
+.btn-loading[data-state="success"] .btn-loading-check,
+.btn-loading[data-state="error"] .btn-loading-cross {
+  display: block;
+}
+
+.btn-loading-spinner {
+  animation: btn-loading-spin 800ms linear infinite;
+}
+
+@keyframes btn-loading-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Read by screen readers; shown in place of the icons under reduced motion. */
+.btn-loading-status {
+  opacity: 0;
+}
+
+.btn-loading:focus-visible {
+  outline: 2px solid var(--btn-ring);
+  outline-offset: 2px;
+}
+
+.btn-loading:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-loading,
+  .btn-loading-label {
+    transition: none;
+  }
+
+  .btn-loading-icon {
+    display: none;
+  }
+
+  /* The status text takes the label's place in the flow, so it always fits. */
+  .btn-loading-status {
+    position: static;
+    opacity: 1;
+  }
+
+  .btn-loading:not([data-state="idle"]) .btn-loading-label {
+    position: absolute;
+  }
+}

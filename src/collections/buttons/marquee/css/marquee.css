@@ -1,0 +1,85 @@
+/* Adapted from "happy-moth-17" by doniaskima (Uiverse), https://uiverse.io/doniaskima/happy-moth-17 · MIT License · Copyright (c) 2023 Uiverse.io */
+.btn-marquee {
+  --btn-bg: #000000;
+  --btn-bg-hover: #27272a;
+  --btn-fg: #ffffff;
+  --btn-edge: #ffffff;
+  --btn-ring: #71717a;
+
+  position: relative;
+  overflow: hidden;
+  display: inline-grid;
+  place-items: center;
+  padding: 0.625rem 3rem;
+  border: 2px solid var(--btn-edge);
+  border-radius: 9999px;
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 900;
+  line-height: 1.25rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 150ms;
+}
+
+/* Label and ticker share one grid cell; the hover swaps which one shows. */
+.btn-marquee-label,
+.btn-marquee-ticker {
+  grid-area: 1 / 1;
+  transition: opacity 200ms;
+}
+
+/* The ticker is one word plus text-shadow copies 6em to either side (keep that
+   gap wider than the label). Sliding by exactly 6em loops seamlessly. */
+.btn-marquee-ticker {
+  opacity: 0;
+  text-shadow:
+    6em 0 currentColor,
+    -6em 0 currentColor,
+    -12em 0 currentColor;
+}
+
+.btn-marquee:hover:enabled {
+  background: var(--btn-bg-hover);
+}
+
+.btn-marquee:hover:enabled .btn-marquee-label,
+.btn-marquee:focus-visible .btn-marquee-label {
+  opacity: 0;
+}
+
+.btn-marquee:hover:enabled .btn-marquee-ticker,
+.btn-marquee:focus-visible .btn-marquee-ticker {
+  opacity: 1;
+  animation: btn-marquee-scroll 1.2s linear infinite;
+}
+
+.btn-marquee:focus-visible {
+  outline: 2px solid var(--btn-ring);
+  outline-offset: 2px;
+}
+
+.btn-marquee:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+@keyframes btn-marquee-scroll {
+  to {
+    transform: translateX(6em);
+  }
+}
+
+/* No ticker: the label stays put and the hover colour is the feedback. */
+@media (prefers-reduced-motion: reduce) {
+  .btn-marquee-ticker {
+    display: none;
+  }
+
+  .btn-marquee:hover:enabled .btn-marquee-label,
+  .btn-marquee:focus-visible .btn-marquee-label {
+    opacity: 1;
+  }
+}

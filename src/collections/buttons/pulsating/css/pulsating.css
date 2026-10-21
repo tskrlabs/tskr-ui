@@ -1,0 +1,70 @@
+/* Adapted from "Pulsating Button" by Magic UI, https://magicui.design/docs/components/pulsating-button · MIT License · Copyright (c) Magic UI */
+.btn-pulsating {
+  --btn-bg: #7c3aed;
+  --btn-bg-hover: #8b5cf6;
+  --btn-fg: #ffffff;
+  --btn-pulse: rgb(124 58 237 / 0.5);
+  --btn-ring: #8b5cf6;
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border: 0;
+  border-radius: 0.5rem;
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+  cursor: pointer;
+  transition: background-color 150ms;
+}
+
+/* The ring: an empty layer over the button whose box-shadow spreads out and
+   back. It's drawn in currentColor, so its colour comes from --btn-pulse. */
+.btn-pulsating::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  color: var(--btn-pulse);
+  pointer-events: none;
+  animation: btn-pulsating-pulse 1.5s ease-out infinite;
+}
+
+.btn-pulsating:hover:enabled {
+  background: var(--btn-bg-hover);
+}
+
+.btn-pulsating:focus-visible {
+  outline: 2px solid var(--btn-ring);
+  outline-offset: 2px;
+}
+
+.btn-pulsating:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.btn-pulsating:disabled::before {
+  display: none;
+}
+
+@keyframes btn-pulsating-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 currentColor;
+  }
+  50% {
+    box-shadow: 0 0 0 8px currentColor;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-pulsating::before {
+    display: none;
+  }
+}

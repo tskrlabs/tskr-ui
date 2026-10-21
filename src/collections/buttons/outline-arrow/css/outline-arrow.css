@@ -1,0 +1,65 @@
+/* Adapted from "dull-snake-38" by reshades (Uiverse), https://uiverse.io/reshades/dull-snake-38 · MIT License · Copyright (c) 2023 Uiverse.io */
+.btn-outline-arrow {
+  /* One colour does the border, the resting text and the fill, so it has to
+     read on light and dark pages alike. */
+  --btn-accent: #4361ff;
+  --btn-fg-filled: #ffffff;
+  --btn-ring: #4361ff;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.625rem 1.25rem;
+  border: 2px solid var(--btn-accent);
+  border-radius: 0.75rem;
+  background: transparent;
+  color: var(--btn-accent);
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+  cursor: pointer;
+  transition:
+    background-color 500ms,
+    color 500ms;
+}
+
+.btn-outline-arrow-icon {
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 500ms;
+}
+
+.btn-outline-arrow:hover:enabled,
+.btn-outline-arrow:focus-visible {
+  background: var(--btn-accent);
+  color: var(--btn-fg-filled);
+}
+
+.btn-outline-arrow:hover:enabled .btn-outline-arrow-icon,
+.btn-outline-arrow:focus-visible .btn-outline-arrow-icon {
+  transform: translateX(5px);
+}
+
+.btn-outline-arrow:focus-visible {
+  outline: 2px solid var(--btn-ring);
+  outline-offset: 2px;
+}
+
+.btn-outline-arrow:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* The fill stays; the arrow doesn't move. */
+@media (prefers-reduced-motion: reduce) {
+  .btn-outline-arrow:hover:enabled .btn-outline-arrow-icon,
+  .btn-outline-arrow:focus-visible .btn-outline-arrow-icon {
+    transform: none;
+  }
+}

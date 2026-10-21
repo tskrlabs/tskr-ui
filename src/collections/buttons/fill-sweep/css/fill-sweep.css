@@ -1,0 +1,66 @@
+/* Adapted from "stale-baboon-45" by Madflows (Uiverse), https://uiverse.io/Madflows/stale-baboon-45 · MIT License · Copyright (c) 2023 Uiverse.io */
+.btn-fill-sweep {
+  --btn-bg: #3d3a4e;
+  --btn-fill-from: #965de9;
+  --btn-fill-to: #6358ee;
+  --btn-fg: #ffffff;
+  --btn-ring: #8b5cf6;
+
+  position: relative;
+  isolation: isolate; /* lets the fill sit between the background and the label */
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 3rem;
+  padding: 0 2rem;
+  border: 0;
+  border-radius: 9999px;
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+  cursor: pointer;
+}
+
+/* The fill: squashed to nothing against the left edge, stretched across on
+   hover/focus. */
+.btn-fill-sweep::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(82.3deg, var(--btn-fill-from) 10.8%, var(--btn-fill-to) 94.3%);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 475ms;
+}
+
+.btn-fill-sweep:hover::before,
+.btn-fill-sweep:focus-visible::before {
+  transform: scaleX(1);
+}
+
+.btn-fill-sweep:focus-visible {
+  outline: 2px solid var(--btn-ring);
+  outline-offset: 2px;
+}
+
+.btn-fill-sweep:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.btn-fill-sweep:disabled::before {
+  display: none;
+}
+
+/* Fills in at once instead of sweeping. */
+@media (prefers-reduced-motion: reduce) {
+  .btn-fill-sweep::before {
+    transition: none;
+  }
+}

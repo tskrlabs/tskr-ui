@@ -1,0 +1,12 @@
+/* Adapted from "Pulsating Button" by Magic UI, https://magicui.design/docs/components/pulsating-button · MIT License · Copyright (c) Magic UI */
+/* Tailwind has no keyframes for a spreading box-shadow, so this one rule comes
+   along. The ring is drawn in currentColor: set it with a text-* class. */
+@keyframes btn-pulsating-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 currentColor;
+  }
+  50% {
+    box-shadow: 0 0 0 8px currentColor;
+  }
+}

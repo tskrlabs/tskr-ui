@@ -1,0 +1,64 @@
+.btn-spotlight {
+  --btn-bg: #09090b;
+  --btn-fg: #ffffff;
+  --btn-edge: rgb(255 255 255 / 0.15);
+  --btn-glow: rgb(196 181 253 / 0.45);
+  --btn-ring: #a78bfa;
+  /* Moved by the script; the centre is the keyboard / reduced-motion spot. */
+  --btn-spotlight-x: 50%;
+  --btn-spotlight-y: 50%;
+
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border: 0;
+  border-radius: 0.5rem;
+  box-shadow: inset 0 0 0 1px var(--btn-edge);
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+  cursor: pointer;
+}
+
+.btn-spotlight-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle 80px at var(--btn-spotlight-x) var(--btn-spotlight-y),
+    var(--btn-glow),
+    transparent
+  );
+  opacity: 0;
+  transition: opacity 300ms;
+  pointer-events: none;
+}
+
+@media (hover: hover) {
+  .btn-spotlight:hover:enabled .btn-spotlight-glow {
+    opacity: 1;
+  }
+}
+
+.btn-spotlight:focus-visible .btn-spotlight-glow {
+  opacity: 1;
+}
+
+.btn-spotlight-label {
+  position: relative;
+}
+
+.btn-spotlight:focus-visible {
+  outline: 2px solid var(--btn-ring);
+  outline-offset: 2px;
+}
+
+.btn-spotlight:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}

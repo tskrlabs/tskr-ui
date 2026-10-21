@@ -1,0 +1,29 @@
+<!-- Adapted from "Interactive Hover Button" by Magic UI, https://magicui.design/docs/components/interactive-hover-button · MIT License · Copyright (c) Magic UI -->
+<button
+  type="button"
+  class="group relative inline-flex items-center justify-center overflow-hidden rounded-full border border-zinc-300 bg-white px-6 py-2.75 text-sm font-semibold text-zinc-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-500 disabled:cursor-not-allowed disabled:opacity-50"
+>
+  <span class="flex items-center gap-2">
+    <span
+      aria-hidden="true"
+      class="size-2 rounded-full bg-zinc-900 transition-transform duration-300 group-focus-visible:scale-[100.8] group-enabled:group-hover:scale-[100.8] motion-reduce:transition-none"
+    ></span>
+    <span
+      class="transition duration-300 group-focus-visible:translate-x-12 group-focus-visible:opacity-0 group-enabled:group-hover:translate-x-12 group-enabled:group-hover:opacity-0 motion-reduce:transition-none"
+      >Get started</span
+    >
+  </span>
+  <span
+    aria-hidden="true"
+    class="absolute inset-0 z-10 flex translate-x-12 items-center justify-center gap-2 text-white opacity-0 transition duration-300 group-focus-visible:translate-x-0 group-focus-visible:opacity-100 group-enabled:group-hover:translate-x-0 group-enabled:group-hover:opacity-100 motion-reduce:transition-none"
+  >
+    Get started
+    <svg
+      viewBox="0 0 24 24"
+      class="size-4 fill-none stroke-current stroke-2 [stroke-linecap:round] [stroke-linejoin:round]"
+    >
+      <path d="M5 12h14" />
+      <path d="m12 5 7 7-7 7" />
+    </svg>
+  </span>
+</button>
